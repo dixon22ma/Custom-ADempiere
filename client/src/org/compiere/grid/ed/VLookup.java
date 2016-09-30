@@ -47,10 +47,11 @@ import javax.swing.KeyStroke;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 
+import org.adempiere.exceptions.ValueChangeListener;
 import org.compiere.apps.ADialog;
 import org.compiere.apps.AEnv;
 import org.compiere.apps.AWindow;
-import org.compiere.apps.FieldRecordInfo;
+import org.compiere.apps.RecordInfo;
 import org.compiere.apps.search.Info;
 import org.compiere.apps.search.InfoBPartner;
 import org.compiere.apps.search.InfoFactory;
@@ -110,6 +111,9 @@ import org.eevolution.model.I_PP_Product_BOMLine;
  * 	@author Yamel Senih, ysenih@erpcya.com, ERPCyA http://www.erpcya.com
  * 		<li> BR [ 9223372036854775807 ] Lookup for search view not show button
  * 		@see https://adempiere.atlassian.net/browse/ADEMPIERE-447
+ * 	@author Yamel Senih, ysenih@erpcya.com, ERPCyA http://www.erpcya.com
+ *		<li> FR [ 146 ] Remove unnecessary class, add support for info to specific column
+ *		@see https://github.com/adempiere/adempiere/issues/146
  */
 public class VLookup extends JComponent
 	implements VEditor, ActionListener, FocusListener
@@ -791,7 +795,7 @@ public class VLookup extends JComponent
 			ValuePreference.addMenu (this, popupMenu);
 		
 		if (m_mField != null)
-			FieldRecordInfo.addMenu(this, popupMenu);
+			RecordInfo.addMenu(this, popupMenu);
 		
 		if (mField != null && mField.isAutocomplete()
 				&& m_lookup instanceof MLookup
@@ -824,9 +828,9 @@ public class VLookup extends JComponent
 				ValuePreference.start (m_mField, getValue(), getDisplay());
 			return;
 		}
-		else if (e.getActionCommand().equals(FieldRecordInfo.CHANGE_LOG_COMMAND))
+		else if (e.getActionCommand().equals(RecordInfo.CHANGE_LOG_COMMAND))
 		{
-			FieldRecordInfo.start(m_mField);
+			RecordInfo.start(m_mField);
 			return;
 		}
 
@@ -914,20 +918,21 @@ public class VLookup extends JComponent
 		catch (PropertyVetoException pve)
 		{
 			log.log(Level.SEVERE, m_columnName, pve);
+			return;
 		}
 		//  is the value updated ?
 		boolean updated = false;
 
 		Object updatedValue = value;
 
-		if (updatedValue instanceof Object[] && ((Object[])updatedValue).length > 0)
+		if (updatedValue != null && updatedValue instanceof Object[] && ((Object[])updatedValue).length > 0)
 		{
 			updatedValue = ((Object[])updatedValue)[0];
 		}
 
 		if (updatedValue == null && m_value == null)
 			updated = true;
-		else if (updatedValue != null && value.equals(m_value))
+		else if (updatedValue != null && updatedValue.equals(m_value))
 			updated = true;
 		if (!updated)
 		{
@@ -1951,6 +1956,12 @@ public class VLookup extends JComponent
 				m_isSOTrx = false;
 			else
 				m_isSOTrx = true;
+	}
+
+	@Override
+	public void addValueChangeListener(ValueChangeListener listener) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }	//	VLookup
