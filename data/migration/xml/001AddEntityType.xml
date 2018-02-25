@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Migrations>
+  <Migration EntityType="D" Name="Customization for Venezuela" ReleaseNo="" SeqNo="3010">
+    <Comments>Add Entity Type</Comments>
+    <Step SeqNo="10" StepType="AD">
+      <PO AD_Table_ID="50009" Action="U" Record_ID="50003" Table="AD_SysConfig">
+        <Data AD_Column_ID="50196" Column="Value" oldValue="Customization By DMSoftware">Customization for Venezuelan Country</Data>
+        <Data AD_Column_ID="50197" Column="Description" oldValue="Comment to reserve the system sequences (MSequence)">Customization By DMSoftware</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="20" StepType="AD">
+      <PO AD_Table_ID="882" Action="I" Record_ID="1000000" Table="AD_EntityType">
+        <Data AD_Column_ID="15595" Column="AD_EntityType_ID">1000000</Data>
+        <Data AD_Column_ID="15593" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="15607" Column="Processing">false</Data>
+        <Data AD_Column_ID="15594" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15597" Column="Created">2018-02-25 15:57:02.182</Data>
+        <Data AD_Column_ID="15600" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="15602" Column="Description" isNewNull="true"/>
+        <Data AD_Column_ID="15604" Column="Version" isNewNull="true"/>
+        <Data AD_Column_ID="15605" Column="ModelPackage">org.dms.model</Data>
+        <Data AD_Column_ID="15606" Column="Classpath" isNewNull="true"/>
+        <Data AD_Column_ID="15603" Column="Help" isNewNull="true"/>
+        <Data AD_Column_ID="15598" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="15601" Column="Name">DM Software</Data>
+        <Data AD_Column_ID="84318" Column="UUID" isNewNull="true"/>
+        <Data AD_Column_ID="15599" Column="Updated">2018-02-25 15:57:02.182</Data>
+        <Data AD_Column_ID="15596" Column="IsActive">true</Data>
+        <Data AD_Column_ID="15592" Column="EntityType">DMS</Data>
+      </PO>
+    </Step>
+  </Migration>
+</Migrations>
